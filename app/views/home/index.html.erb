@@ -1,0 +1,10 @@
+<h4>Nossos Produtos:</h4>
+<hr />
+<br />
+<% @products.each do |product| %>
+  <p>Nome: <%= product.title %></p>
+  <p>Preço: R$<%= product.price %></p>
+  <p>Descrição: <%= product.description %></p>
+  <td><%= link_to 'Comprar Produto', order_new_path(product_id: product.id), class: 'btn btn-success' %></td>
+  <hr />
+<% end %>

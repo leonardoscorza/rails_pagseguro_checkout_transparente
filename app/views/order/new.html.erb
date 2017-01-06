@@ -1,0 +1,159 @@
+<div class="container">
+   <div class="row">
+     <h2 class="col-md-4 col-md-offset-4">Finalize sua compra</h2>
+   </div>
+   <legend>Dados do Produto</legend>
+   <p>Nome: <%= @product.title %></p>
+   <p>Preço: $<%= @product.price %></p>
+   <p>Descrição: <%= @product.description %></p>
+   <input id='price' type="hidden" value="210">
+   <div id="payment_datas">
+   <form class="form-horizontal" role="form" action="/order/create" method="POST">
+     <div id='payment-datas'>
+       <div>
+         <input type="hidden" name="product_id" value="<%= @product.id %>">
+         <input type="hidden" name="card_token" id="card_token" />
+         <input type="hidden" name="sender_hash" id="sender_hash" />
+         <%= csrf_meta_tag %>
+       </div>
+       <fieldset>
+         <legend>Dados Pessoais do Comprador</legend>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Nome</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='name' placeholder="exp: José Paulo" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Email</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='email' placeholder="exp: c56048717318@sandbox.pagseguro.com.br" required>
+           </div>
+           *No sandbox use o email: c56048717318@sandbox.pagseguro.com.br
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Cpf</label>
+           <div class="col-sm-2">
+             <input type="text" class="form-control" name='cpf' placeholder="39813476548" required>
+           </div>
+           * Não use . ou - no CPF ou trate isso :)
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Telefone</label>
+           <div class="col-sm-1">
+             <input type="text" class="form-control" name='phone_code' placeholder="11" required>
+           </div>
+           <div class="col-sm-2">
+             <input type="text" class="form-control" name='phone_number' placeholder="997874567" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Data de Nascimento</label>
+           <div class="col-sm-2">
+             <input type="text" class="form-control" name='birthday' placeholder="10/10/1991" required>
+           </div>
+         </div>
+       </fieldset>
+       <fieldset>
+         <legend>Dados do Cartão</legend>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Name on Card</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='card_name' id='card-name' placeholder="Card Holder's Name" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label" for="card-number">Card Number</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='card-number' id='card-number' placeholder="Debit/Credit Card Number" required>
+           </div>
+           <div class="col-sm-1">
+             <span id="card-flag"></span>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Expiration Date</label>
+           <div class="col-sm-9">
+             <div class="row">
+               <div class="col-xs-3">
+                 <select class="form-control col-sm-2" name='card-month' id='card-month' required>
+                   <option>Month</option>
+                   <option value="01">Jan (01)</option>
+                   <option value="02">Feb (02)</option>
+                   <option value="03">Mar (03)</option>
+                   <option value="04">Apr (04)</option>
+                   <option value="05">May (05)</option>
+                   <option value="06">June (06)</option>
+                   <option value="07">July (07)</option>
+                   <option value="08">Aug (08)</option>
+                   <option value="09">Sep (09)</option>
+                   <option value="10">Oct (10)</option>
+                   <option value="11">Nov (11)</option>
+                   <option value="12">Dec (12)</option>
+                 </select>
+               </div>
+               <div class="col-xs-3">
+                 <select class="form-control" name='card-year' id='card-year' required>
+                   <option value="2016">2016</option>
+                   <option value="2017">2017</option>
+                   <option value="2018">2018</option>
+                   <option value="2019">2019</option>
+                   <option value="2010">2020</option>
+                   <option value="2021">2021</option>
+                   <option value="2022">2022</option>
+                   <option value="2023">2023</option>
+                   <option value="2024">2024</option>
+                   <option value="2025">2025</option>
+                   <option value="2026">2026</option>
+                   <option value="2027">2027</option>
+                   <option value="2028">2028</option>
+                   <option value="2029">2029</option>
+                   <option value="2030">2030</option>
+                 </select>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="form-group" id="card-cvv-box" style="display: none">
+           <label class="col-sm-3 control-label">Card CVV</label>
+           <div class="col-sm-3">
+             <input type="text" class="form-control" name='card-cvv' id='card-cvv' placeholder="Security Code">
+           </div>
+         </div>
+         <div class="form-group" id="card-options-box" style="display: none">
+           <hr />
+           <label class="col-sm-3 control-label">Payment Options (parcelamentos)</label>
+           <div class="col-sm-3">
+             <select class="form-control col-sm-2" id="card-options">
+             </select>
+           </div>
+           <hr />
+         </div>
+         <div class="form-group">
+           <div class="col-sm-offset-3 col-sm-9">
+             <button type="button" class="btn btn-success" id="buy-button">Confirmar dados do cartão</button>
+           </div>
+         </div>
+       </fieldset>
+     </div>
+     <div id='finish-buy' style="display: none">
+       <fieldset>
+         <legend>Confirmar Pagamento</legend>
+         <div class="form-group">
+           <div class="col-sm-offset-3 col-sm-9">
+             <%= csrf_meta_tags %>
+             <button type="submit" class="btn btn-success" id="buy-button">Finalizar Compra</button>
+             <button type="button" class="btn btn-primary" id="edit-payment">Editar Meio de Pagamento</button>
+           </div>
+         </div>
+       </fieldset>
+     </div>
+   </form>
+ </div>
+</div>
+
+
+
+<%= javascript_tag do %>
+  window.sessionId = '<%= j @session_id %>';
+<% end %>

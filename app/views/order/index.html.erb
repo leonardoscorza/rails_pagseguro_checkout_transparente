@@ -2,7 +2,7 @@
 <br />
 <% @orders.each do |order| %>
   <p>Product Name: <%= order.product.title %></p>
-  <p>User: <%= order.user.email %></p>
+  <p>User: <%= order.buyer_name %></p>
   <p>Status: <%= order.status %></p>
   <hr />
 <% end %>

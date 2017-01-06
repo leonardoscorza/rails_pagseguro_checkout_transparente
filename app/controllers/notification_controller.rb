@@ -1,5 +1,7 @@
 class NotificationController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :create
+  protect_from_forgery
+  
   def create
     transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
     status = ['Aguardando Pagamento', 'Em análise', 'Paga', 'Disponível', 'Em disputa', 'Devolvida', 'Cancelada']

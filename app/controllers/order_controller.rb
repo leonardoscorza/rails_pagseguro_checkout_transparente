@@ -62,6 +62,7 @@ class OrderController < ApplicationController
     if payment.errors.any?
      puts "=> ERRORS"
      puts payment.errors.join("\n")
+     render plain: "Erro No Pagamento #{payment.errors.join("\n")}"
     else
      puts "=> Transaction"
      puts "  code: #{payment.code}"
@@ -92,9 +93,9 @@ class OrderController < ApplicationController
      puts "      email: #{payment.sender.email}"
      puts "      phone: (#{payment.sender.phone.area_code}) #{payment.sender.phone.number}"
      puts "      document: #{payment.sender.document}: #{payment.sender.document}"
+     render plain: "Sucesso, seu pagamento será processado :)"
     end
 
-    render plain: 'hey you'
   end
 
   def index

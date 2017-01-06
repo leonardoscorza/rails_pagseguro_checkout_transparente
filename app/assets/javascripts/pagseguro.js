@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+$( document ).on('turbolinks:load', function() {
+  console.log('hey');
   // Inicia o PagSeguro
   PagSeguroDirectPayment.setSessionId(window.sessionId);
 

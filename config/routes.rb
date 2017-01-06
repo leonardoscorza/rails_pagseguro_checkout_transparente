@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   devise_for :users
-  post 'notification'
+  post 'notification', to: 'notification#create'
 
   get 'order/new'
 

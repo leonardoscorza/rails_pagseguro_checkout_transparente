@@ -1,24 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Usando o checkout Transparente do PagSeguro com o Ruby On Rails
+Projeto Open Source desenvolvido como um tutorial para o blog http://onebicode.com
+Vejo o tutorial no Blog :)

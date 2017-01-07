@@ -1,7 +1,6 @@
-$( document ).on('turbolinks:load', function() {
-  console.log('hey');
+$( document ).ready(function() {
   // Inicia o PagSeguro
-  PagSeguroDirectPayment.setSessionId(window.sessionId);
+  PagSeguroDirectPayment.setSessionId($("#session_id").val());
 
   // Verifica se existe um cartão preenchido
   card_flag();

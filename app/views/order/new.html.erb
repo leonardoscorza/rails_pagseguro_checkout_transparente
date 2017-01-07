@@ -1,5 +1,3 @@
-
-
 <div class="container">
    <div class="row">
      <h2 class="col-md-4 col-md-offset-4">Finalize sua compra</h2>
@@ -16,6 +14,7 @@
          <input type="hidden" name="product_id" value="<%= @product.id %>">
          <input type="hidden" name="card_token" id="card_token" />
          <input type="hidden" name="sender_hash" id="sender_hash" />
+         <input type="hidden" name="session_id" id="session_id" value="<%= @session_id %>" />
          <%= csrf_meta_tag %>
        </div>
        <fieldset>
@@ -153,9 +152,3 @@
    </form>
  </div>
 </div>
-
-
-
-<%= javascript_tag do %>
-  window.sessionId = '<%= j @session_id %>';
-<% end %>

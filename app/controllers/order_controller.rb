@@ -1,16 +1,18 @@
 class OrderController < ApplicationController
   protect_from_forgery
 
+  # Gerar um Token de sessão para nosso pagamento
   def new
     @product = Product.find(params[:product_id])
     @session_id = (PagSeguro::Session.create).id
   end
 
+  # Enviar nosso pagamento para o Pagseguro
   def create
     @product = Product.find(params[:product_id])
 
     payment = PagSeguro::CreditCardTransactionRequest.new
-    payment.notification_url = "https://secret-wave-53573.herokuapp.com/notification"
+    payment.notification_url = "https://secret-wave-53573.herokuapp.com/notification  "
     payment.payment_mode = "gateway"
 
     # Aqui vão os itens que serão cobrados na transação, caso você tenha multiplos itens
